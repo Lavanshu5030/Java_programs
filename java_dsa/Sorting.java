@@ -45,9 +45,48 @@ public class Sorting {
 		}
 	}
 	
+	public static int[] merge_sort(int arr2[], int  arr3[]) {
+		int newArr[] = new int[arr2.length + arr3.length];
+		int i = 0; 
+		int j = 0;
+		int k = 0;
+		
+		while (i < arr2.length && j < arr3.length) {
+			if (arr2[i] < arr3[j]) {
+				newArr[k] = arr2[i];
+				i++;
+				k++;
+			}
+			else {
+				newArr[k] = arr3[j];
+				j++;
+				k++;
+			}
+		}
+		
+		while(i < arr2.length) {
+			newArr[k] = arr2[i];
+			i++;
+			k++;
+		}
+		
+		while(j < arr3.length) {
+			newArr[k] = arr3[j];
+			j++;
+			k++;
+		}	
+		return newArr;
+	}
+	
+	public static void printMergeArr(int arr[]){
+	     for (int i = 0; i<arr.length; i++){
+	          System.out.print(arr[i] + " ");
+	      }
+	     System.out.println();
+	  }
 	
 	public static void print(int[]arr, int n) {
-		System.out.println("sort:");
+		System.out.println("sorted:");
 		for (int i = 0; i<n; i++) {
 			System.out.print(arr[i] + " ");
 		}
@@ -57,15 +96,21 @@ public class Sorting {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner s = new Scanner(System.in);
+		
+		// This is to check bubble, selection, insertion sort 
 		int arr[] = {5,4,3,2,1};
 		int n = arr.length;
+		
+		// This is created for merge sort...sorted arrays
+		int arr2[] = {2, 3, 10, 12, 23};
+		int arr3[] = {1, 3, 5, 9};
 		int choice = 0;
 		
 		do {
 			System.out.println("Enter 1 to use Bubble sort");
 			System.out.println("Enter 2 to use Selection sort");
 			System.out.println("Enter 3 to use Insertion sort");
-			System.out.println("Enter 4 to print array");
+			System.out.println("Enter 4 to use Merge sort");
 			System.out.println("Enter 5 to exit menu");
 			System.out.println("Enter your choice:");
 			
@@ -73,18 +118,22 @@ public class Sorting {
 			switch(choice) {
 			case 1:
 				bubble_sort(arr,n);
+				print(arr,n);
 				break;
 				
 			case 2:
 				selection_sort(arr,n);
+				print(arr,n);
 				break;
 				
 			case 3:
 				insertion_sort(arr,n);
-				break;
-				
-			case 4:
 				print(arr,n);
+				break;
+			
+			case 4:
+				int ans[] = merge_sort(arr2,arr3);
+			    printMergeArr(ans);
 				break;
 				
 			case 5:
